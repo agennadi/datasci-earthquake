@@ -16,6 +16,7 @@ jobs:
         envkey_POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
         envkey_POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
         envkey_POSTGIS_VERSION: ${{ secrets.POSTGIS_VERSION }}
+        envkey_DATABASE_URL_NEON: ${{ secrets.DATABASE_URL_NEON }}
 
         envkey_FRONTEND_HOST: ${{ secrets.FRONTEND_HOST }}
         envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
