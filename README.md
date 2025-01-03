@@ -124,7 +124,7 @@ This repository uses `Black` for Python and `ESLint` for JS/TS to enforce code s
 
 # Configuration of environment variables
 
-We use GitHub Secrets to store sensitive environment variables. A template `.env.example` file is provided in the repository as a reference. Only users with **write** access to the repository can manually trigger the `Generate .env File` workflow, which creates and uploads the actual `.env` file as an artifact.
+We use GitHub Secrets to store sensitive environment variables. A template `.env.example` file is provided in the repository as a reference. `.env.local` is added to deploy the app on Vercel. Only users with **write** access to the repository can manually trigger the `Generate .env File` workflow, which creates and uploads the actual `.env` file as an artifact.
 
 **Note**: Before starting work on the project, make sure to:
 
