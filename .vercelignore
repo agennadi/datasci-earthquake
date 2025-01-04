@@ -1,5 +1,5 @@
-# Ignore everything except the serverless function
-*
-!api/
-api/requirements.txt
-api/handler.py
+venv/
+node_modules/
+.git/
+__pycache__/
+*.log
