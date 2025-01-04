@@ -1,0 +1,5 @@
+# Ignore everything except the serverless function
+*
+!api/
+api/requirements.txt
+api/handler.py
