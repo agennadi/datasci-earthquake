@@ -26,6 +26,6 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: ETL data to Supabase DB
+      - name: ETL data to Neon DB
         run: |
-          python backend/etl/liquefaction_data_handler.py
+          python -m backend.etl.liquefaction_data_handler
