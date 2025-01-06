@@ -12,6 +12,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/api/helloFastApi")
+@app.get("/api/py/helloFastApi")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}
