@@ -22,7 +22,7 @@ node_modules
 
 # Sensitive config
 .env.development.local
-.env
+
 
 # IDEs
 .vscode/
