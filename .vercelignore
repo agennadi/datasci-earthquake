@@ -3,3 +3,10 @@ node_modules/
 .git/
 __pycache__/
 *.log
+.next
+*.pyc
+*.pyo
+.vscode/
+*.log
+build/
+dist/
