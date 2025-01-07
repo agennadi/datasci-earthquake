@@ -2,6 +2,8 @@ venv/
 node_modules/
 .git/
 __pycache__/
+pytest_cache/
+mypy_cache/
 *.log
 .next
 *.pyc
@@ -10,3 +12,6 @@ __pycache__/
 *.log
 build/
 dist/
+bin/
+build/
+lib/
