@@ -4,5 +4,6 @@
             "src": "/api/py/(.*)",
             "dest": "api/index.py"
         }
-    ]
+    ],
+    "trailingSlash": false
 }
