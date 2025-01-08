@@ -5,7 +5,7 @@ from backend.api.routers import (
 )
 
 ### Create FastAPI instance with custom docs and openapi url
-app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
+app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json", redirect_slashes=False)
 
 app.add_middleware(
     CORSMiddleware,
