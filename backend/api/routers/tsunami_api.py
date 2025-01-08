@@ -15,7 +15,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=TsunamiFeatureCollection)
+@router.get("", response_model=TsunamiFeatureCollection)
 async def get_tsunami_zones(db: Session = Depends(get_db)):
     """
     Retrieve all tsunami hazard zones from the database.
@@ -34,7 +34,6 @@ async def get_tsunami_zones(db: Session = Depends(get_db)):
         .filter(TsunamiZone.evacuate == "Yes, Tsunami Hazard Area")
         .all()
     )
-    print("tsunami zones:", tsunami_zones)
     if not tsunami_zones:
         raise HTTPException(status_code=404, detail="No tsunami zones found")
     features = [TsunamiFeature.from_sqlalchemy_model(zone) for zone in tsunami_zones]
