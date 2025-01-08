@@ -12,7 +12,7 @@ from ..schemas.liquefaction_schemas import (
 from backend.api.models.liquefaction_zones import LiquefactionZone
 
 router = APIRouter(
-    prefix="/api/py/liquefaction-zones",
+    prefix="/liquefaction-zones",
     tags=[Tags.LIQUEFACTION],
 )
 
