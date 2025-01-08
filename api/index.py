@@ -19,7 +19,7 @@ app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json", redir
 
 app.include_router(liquefaction_api.router)
 app.include_router(tsunami_api.router)
-app.include_router(soft_story_api)
+app.include_router(soft_story_api.router)
 
 @app.get("/api/py/helloFastApi")
 def hello_fast_api():
