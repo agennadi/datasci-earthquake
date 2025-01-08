@@ -17,7 +17,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", response_model=LiquefactionFeatureCollection)
+@router.get("", response_model=LiquefactionFeatureCollection)
 async def get_liquefaction_zones(db: Session = Depends(get_db)):
     """
     Retrieve all liquefaction zones from the database.
