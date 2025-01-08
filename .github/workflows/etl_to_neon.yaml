@@ -1,4 +1,4 @@
-name: ETL to supabase
+name: ETL to neon
 
 # Workflow triggers
 on:
@@ -29,3 +29,4 @@ jobs:
       - name: ETL data to Neon DB
         run: |
           python -m backend.etl.liquefaction_data_handler
+          python -m backend.etl.tsunami_data_handler
