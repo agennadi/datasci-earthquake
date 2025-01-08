@@ -10,6 +10,7 @@ from ..schemas.liquefaction_schemas import (
     LiquefactionFeatureCollection,
 )
 from backend.api.models.liquefaction_zones import LiquefactionZone
+import time
 
 router = APIRouter(
     prefix="/api/py/liquefaction-zones",
@@ -19,6 +20,8 @@ router = APIRouter(
 
 @router.get("", response_model=LiquefactionFeatureCollection)
 async def get_liquefaction_zones(db: Session = Depends(get_db)):
+    start_time = time.time()
+
     """
     Retrieve all liquefaction zones from the database.
 
@@ -32,7 +35,7 @@ async def get_liquefaction_zones(db: Session = Depends(get_db)):
         HTTPException: If no zones are found (404 error).
     """
     # Query the database for all seismic zones
-    liquefaction_zones = db.query(LiquefactionZone).limit(3).all()
+    liquefaction_zones = db.query(LiquefactionZone).all()
 
     # If no zones are found, raise a 404 error
     if not liquefaction_zones:
@@ -41,6 +44,8 @@ async def get_liquefaction_zones(db: Session = Depends(get_db)):
     features = [
         LiquefactionFeature.from_sqlalchemy_model(zone) for zone in liquefaction_zones
     ]
+    end_time = time.time()
+    print(f"Total request processing time: {end_time - start_time:.2f} seconds")
     return LiquefactionFeatureCollection(type="FeatureCollection", features=features)
 
 
