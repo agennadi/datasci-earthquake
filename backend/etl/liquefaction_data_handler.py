@@ -45,6 +45,6 @@ if __name__ == "__main__":
     try:
         liquefaction_zones = handler.fetch_data()
         liquefaction_zones_objects = handler.parse_data(liquefaction_zones)
-        handler.bulk_insert_data(liquefaction_zones_objects, "identifier")
+        handler.bulk_insert_data(liquefaction_zones_objects, ["liq", "geometry"])
     except HTTPException as e:
         print(f"Failed after retries: {e}")

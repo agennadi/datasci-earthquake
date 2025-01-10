@@ -11,6 +11,8 @@ from ..schemas.liquefaction_schemas import (
 )
 from backend.api.models.liquefaction_zones import LiquefactionZone
 import time
+import sys
+import json
 
 router = APIRouter(
     prefix="/api/py/liquefaction-zones",
@@ -46,7 +48,9 @@ async def get_liquefaction_zones(db: Session = Depends(get_db)):
     ]
     end_time = time.time()
     print(f"Total request processing time: {end_time - start_time:.2f} seconds")
-    return LiquefactionFeatureCollection(type="FeatureCollection", features=features)
+    res = json.dumps(LiquefactionFeatureCollection(type="FeatureCollection", features=features))
+    print(f'the data weights {len(res)/1024} KB')
+   #return LiquefactionFeatureCollection(type="FeatureCollection", features=features)
 
 
 @router.get("/is-in-liquefaction-zone", response_model=bool)
