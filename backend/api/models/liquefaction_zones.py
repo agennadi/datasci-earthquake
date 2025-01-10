@@ -10,7 +10,7 @@ from backend.api.models.base import Base
 from geoalchemy2.shape import to_shape
 from shapely import to_geojson
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import Index
+from sqlalchemy import UniqueConstraint
 
 class LiquefactionZone(Base):
     """
@@ -33,9 +33,8 @@ class LiquefactionZone(Base):
         DateTime(timezone=True), server_default=func.now()
     )
     __table_args__ = (
-        Index('unique_geometry_liq', 'geometry', 'liq', unique=True),  # Unique index
+        UniqueConstraint('geometry', 'liq', name='unique_geometry_liq'),  # Unique constraint
     )
-
     @hybrid_property
     def multipolygon_as_geosjon(self):
         """Convert multipolygons to a geojson"""
