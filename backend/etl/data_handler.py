@@ -85,7 +85,7 @@ class DataHandler(ABC):
             db.execute(stmt)
             db.commit()
 
-    def bulk_insert_data_autoincremented(self, data_dicts: list[dict]):
+    def bulk_insert_data_autoincremented(self, data_dicts: list[dict], unique_fields):
         """
         Inserts the list of dictionaries with SQLAlchemy-generated IDs into the database table as
         SQLAlchemy objects
@@ -93,6 +93,6 @@ class DataHandler(ABC):
         # TODO: Implement logic to upsert only changed data
         with next(get_db()) as db:
             stmt = pg_insert(self.table).values(data_dicts)
-            stmt = stmt.on_conflict_do_nothing()
+            stmt = stmt.on_conflict_do_nothing(index_elements=unique_fields)
             db.execute(stmt)
             db.commit()

@@ -10,7 +10,7 @@ from backend.api.models.base import Base
 from geoalchemy2.shape import to_shape
 from shapely import to_geojson
 from sqlalchemy.ext.hybrid import hybrid_property
-
+from sqlalchemy import Index
 
 class LiquefactionZone(Base):
     """
@@ -31,6 +31,9 @@ class LiquefactionZone(Base):
     shape_area: Mapped[float] = mapped_column(Float)
     update_timestamp: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
+    )
+    __table_args__ = (
+        Index('unique_geometry_liq', 'geometry', 'liq', unique=True),  # Unique index
     )
 
     @hybrid_property
