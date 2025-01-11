@@ -10,7 +10,7 @@ from backend.api.models.base import Base
 from geoalchemy2.shape import to_shape
 from shapely import to_geojson
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import UniqueConstraint
+from sqlalchemy import UniqueConstraint, Index
 
 class LiquefactionZone(Base):
     """
@@ -22,19 +22,20 @@ class LiquefactionZone(Base):
 
     __tablename__ = "liquefaction_zones"
 
-    identifier: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=True
+    identifier: Mapped[str] = mapped_column(
+        String, primary_key=True
     )
-    geometry: Mapped[Geometry] = mapped_column(Geometry("MULTIPOLYGON", srid=4326))
+    geometry: Mapped[Geometry] = mapped_column(Geometry("MULTIPOLYGON", srid=4326), nullable=False)
     liq: Mapped[str] = mapped_column(String)
     shape_length: Mapped[float] = mapped_column(Float)
     shape_area: Mapped[float] = mapped_column(Float)
     update_timestamp: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
-    __table_args__ = (
-        UniqueConstraint('geometry', 'liq', name='unique_geometry_liq'),  # Unique constraint
-    )
+    '''__table_args__ = (
+    UniqueConstraint('shape_area', 'liq', name='unique_geometry_liq'),
+    )'''
+
     @hybrid_property
     def multipolygon_as_geosjon(self):
         """Convert multipolygons to a geojson"""

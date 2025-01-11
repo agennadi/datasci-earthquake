@@ -31,6 +31,7 @@ class _LiquefactionDataHandler(DataHandler):
             multipolygon = shape(geometry)
             geoalchemy_multipolygon = from_shape(multipolygon, srid=4326)
             liquefaction_zone = {
+                "identifier": f'{properties.get("shape_leng")}-{properties.get("shape_area")}-{properties.get("liq")}',
                 "liq": properties.get("liq"),
                 "geometry": geoalchemy_multipolygon,
                 "shape_length": properties.get("shape_leng"),
@@ -45,6 +46,6 @@ if __name__ == "__main__":
     try:
         liquefaction_zones = handler.fetch_data()
         liquefaction_zones_objects = handler.parse_data(liquefaction_zones)
-        handler.bulk_insert_data_autoincremented(liquefaction_zones_objects, ["liq", "geometry"])
+        handler.bulk_insert_data(liquefaction_zones_objects, "identifier")
     except HTTPException as e:
         print(f"Failed after retries: {e}")
