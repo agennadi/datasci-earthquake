@@ -48,11 +48,11 @@ async def get_liquefaction_zones(db: Session = Depends(get_db)):
     ]
     end_time = time.time()
     print(f"Total request processing time: {end_time - start_time:.2f} seconds")
-    serialized_data = [result.to_dict() for result in liquefaction_zones]
+    '''serialized_data = [result.to_dict() for result in liquefaction_zones]
     serialized_data_json = json.dumps(serialized_data)
     
     data_size = len(serialized_data_json)
-    print(f'data_size_kb: {data_size / 1024}')
+    print(f'data_size_kb: {data_size / 1024}')'''
     return LiquefactionFeatureCollection(type="FeatureCollection", features=features)
 
 
