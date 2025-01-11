@@ -10,7 +10,7 @@ from backend.api.models.base import Base
 from geoalchemy2.shape import to_shape
 from shapely import to_geojson
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy import UniqueConstraint, Index
+from sqlalchemy import Index
 
 class LiquefactionZone(Base):
     """
@@ -32,9 +32,10 @@ class LiquefactionZone(Base):
     update_timestamp: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )
-    '''__table_args__ = (
-    UniqueConstraint('shape_area', 'liq', name='unique_geometry_liq'),
-    )'''
+    # Add a GIST index for the geometry column
+    __table_args__ = (
+        Index('idx_geometry', geometry, postgresql_using='gist'),
+    )
 
     @hybrid_property
     def multipolygon_as_geosjon(self):
