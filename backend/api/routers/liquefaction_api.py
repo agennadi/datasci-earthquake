@@ -37,7 +37,7 @@ async def get_liquefaction_zones(db: Session = Depends(get_db)):
         HTTPException: If no zones are found (404 error).
     """
     # Query the database for all seismic zones
-    liquefaction_zones = db.query(LiquefactionZone).limit(5).all()
+    liquefaction_zones = db.query(LiquefactionZone).all()
 
     # If no zones are found, raise a 404 error
     if not liquefaction_zones:
