@@ -25,10 +25,9 @@ class LiquefactionZone(Base):
     identifier: Mapped[str] = mapped_column(
         String, primary_key=True
     )
-    geometry: Mapped[Geometry] = mapped_column(Geometry("MULTIPOLYGON", srid=4326), nullable=False)
-    liq: Mapped[str] = mapped_column(String)
-    shape_length: Mapped[float] = mapped_column(Float)
-    shape_area: Mapped[float] = mapped_column(Float)
+    geometry: Mapped[Geometry] = mapped_column(Geometry("POLYGON", srid=4326), nullable=False)
+    shape_length: Mapped[float] = mapped_column(Float, nullable=True)
+    shape_area: Mapped[float] = mapped_column(Float, nullable=True)
     update_timestamp: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now()
     )

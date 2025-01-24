@@ -26,7 +26,7 @@ class DataHandler(ABC):
         self.url = url
         self.table = table
 
-    def fetch_data(self, params=None) -> dict:
+    def fetch_data(self, params=None, headers=None) -> dict:
         """
         Fetch data from the API with retry logic.
 
@@ -37,7 +37,7 @@ class DataHandler(ABC):
         adapter = HTTPAdapter(max_retries=retry)
         session = requests.Session()
         session.mount("https://", adapter)
-        response = session.get(self.url, params=params, timeout=60)
+        response = session.get(self.url, headers=headers, params=params, timeout=60)
         response.raise_for_status()
         return response.json()
 
