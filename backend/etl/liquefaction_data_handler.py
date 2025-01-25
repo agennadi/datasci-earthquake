@@ -48,9 +48,6 @@ if __name__ == "__main__":
     try:
         params = {
             "where": "1=1",
-            "geometry": "-13638270.49438025,4538285.617149651,-13620719.109495781,4555775.311559373",
-            "geometryType": "esriGeometryEnvelope",
-            "spatialRel": "esriSpatialRelIntersects",            
             "outFields": "*",
             "f": "geojson",
         }        
