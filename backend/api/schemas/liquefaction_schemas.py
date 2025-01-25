@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from backend.api.models.liquefaction_zones import LiquefactionZone
-from geojson_pydantic import Feature, FeatureCollection, MultiPolygon, Polygon
+from geojson_pydantic import Feature, FeatureCollection, MultiPolygon
 from geoalchemy2.shape import to_shape
 from typing import List
 import json
@@ -17,6 +17,7 @@ class LiquefactionProperties(BaseModel):
     """
 
     identifier: str
+    liq: str
     update_timestamp: datetime
 
 
@@ -31,7 +32,7 @@ class LiquefactionFeature(Feature):
     """
 
     type: str = Field(default="Feature")  # type: ignore
-    geometry: Polygon
+    geometry: MultiPolygon
     properties: LiquefactionProperties
 
     class Config:
@@ -53,6 +54,7 @@ class LiquefactionFeature(Feature):
             geometry=json.loads(liquefaction_zone.multipolygon_as_geosjon),
             properties={
                 "identifier": liquefaction_zone.identifier,
+                "liq": liquefaction_zone.liq,
                 "update_timestamp": liquefaction_zone.update_timestamp,
             },
         )
