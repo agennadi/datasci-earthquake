@@ -1,4 +1,7 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL = process.env.NODE_ENV === 'development'
+? 'http://localhost:8000/api/py'
+: `https://${process.env.VERCEL_URL}/api/py`;
+
 export const ENDPOINTS = {
   softStories: `${BASE_URL}/soft-stories`,
   tsunami: `${BASE_URL}/tsunami-zones`,
