@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://localhost:8000/api/py";
 
 export const ENDPOINTS = {
   softStories: `${BASE_URL}/soft-stories/`,
