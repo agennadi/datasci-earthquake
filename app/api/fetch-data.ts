@@ -1,5 +1,6 @@
-export const fetchData = async ( endpoint: string ) => {
+export const fetchData = async (endpoint: string) => {
   try {
+    console.log("ENDPOINT:", endpoint)
     const response = await fetch(endpoint, {
       cache: 'no-store',
     });
