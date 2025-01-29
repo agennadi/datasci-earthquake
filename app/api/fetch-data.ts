@@ -1,7 +1,8 @@
 export const fetchData = async (endpoint: string) => {
   try {
-    console.log("ENDPOINT:", endpoint)
     console.log('Vercel URL:', process.env.VERCEL_URL);
+    console.log("NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
+    console.log("BASE URL:", endpoint)
     const response = await fetch(endpoint, {
       cache: 'no-store',
     });
