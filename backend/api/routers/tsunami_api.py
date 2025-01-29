@@ -10,7 +10,7 @@ from backend.api.models.tsunami import TsunamiZone
 
 
 router = APIRouter(
-    prefix="/api/py/tsunami-zones",
+    prefix="/api/tsunami-zones",
     tags=[Tags.TSUNAMI],
 )
 
