@@ -6,11 +6,7 @@ import "./globals.css";
 import Report from "./components/report";
 import Information from "./components/information";
 import { Headings } from "./data/data";
-import {
-  fetchSoftStories,
-  fetchTsunami,
-  fetchLiquefaction,
-} from "./api/services";
+import { fetchSoftStories, fetchTsunami } from "./api/services";
 
 const addressLookupCoordinates = {
   geometry: {
@@ -25,7 +21,6 @@ const Home = async () => {
 
   const softStoryData = await fetchSoftStories();
   const tsunamiData = await fetchTsunami();
-  const liquefactionData = await fetchLiquefaction();
 
   return (
     <Flex direction="column">
