@@ -5,14 +5,14 @@ const getBaseUrl = () => {
   }
 
   if (process.env.VERCEL_ENV === "development") {
-    return "http://localhost:8000/py";
+    return "http://localhost:8000/api";
   }
 
   if (process.env.VERCEL_ENV === "preview" || process.env.VERCEL_ENV === "production") {
-    return `https://datasci-earthquake-e2ed5p81t-annas-projects-ec219dc5.vercel.app/py`;
+    return `https://datasci-earthquake.vercel.app/api`;
   }
 
-  return "http://localhost:8000/py"; // Fallback for local dev
+  return "http://localhost:8000/api"; // Fallback for local dev
 };
 
 const BASE_URL = getBaseUrl();

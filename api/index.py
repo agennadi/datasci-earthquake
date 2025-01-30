@@ -7,7 +7,7 @@ from backend.api.routers import (
 )
 
 ### Create FastAPI instance with custom docs and openapi url
-app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json", redirect_slashes=False)
+app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json", redirect_slashes=False)
 
 app.add_middleware(
     CORSMiddleware,
@@ -21,6 +21,6 @@ app.include_router(liquefaction_api.router)
 app.include_router(tsunami_api.router)
 app.include_router(soft_story_api.router)
 
-@app.get("/api/py/helloFastApi")
+@app.get("/api/helloFastApi")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}

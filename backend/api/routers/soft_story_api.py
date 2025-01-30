@@ -12,7 +12,7 @@ from backend.api.schemas.soft_story_schemas import (
 from backend.api.models.soft_story_properties import SoftStoryProperty
 
 router = APIRouter(
-    prefix="/api/py/soft-stories",
+    prefix="/api/soft-stories",
     tags=[Tags.SOFT_STORY],
 )
 

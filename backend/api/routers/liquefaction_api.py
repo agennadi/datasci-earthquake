@@ -15,7 +15,7 @@ import sys
 import json
 
 router = APIRouter(
-    prefix="/api/py/liquefaction-zones",
+    prefix="/api/liquefaction-zones",
     tags=[Tags.LIQUEFACTION],
 )
 
