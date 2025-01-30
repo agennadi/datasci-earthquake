@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     postgres_password: str
     postgres_db: str
     postgis_version: str
-    database_url_neon: str
+    neon_url: str
     frontend_host: str
     database_url: str
     localhost_database_url: str
