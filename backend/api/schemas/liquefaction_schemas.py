@@ -71,16 +71,18 @@ class LiquefactionFeatureCollection(FeatureCollection):
     features: List[LiquefactionFeature]
 
 
-class IsInLiquefactionZoneView(BaseModel):
+class InLiquefactionZoneView(BaseModel):
     """
     Pydantic View model for liquefaction zone check endpoint.
 
     Attributes:
         exists (bool): Whether the point is in a liquefaction zone
         last_updated (Optional[datetime]): Timestamp of last update if exists
+        liq (Optional[str]): Susceptibility of the zone to liquefaction
     """
 
     exists: bool
     last_updated: Optional[datetime] = None
+    liq: Optional[str]
 
     model_config = ConfigDict(from_attributes=True)
