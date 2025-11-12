@@ -43,6 +43,7 @@ app.include_router(health_api.router)
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "https://datasci-earthquake-prod.up.railway.app"
 ]
 
 # Request logging middleware
@@ -59,7 +60,7 @@ async def log_requests(request: Request, call_next):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
