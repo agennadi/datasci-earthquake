@@ -62,8 +62,14 @@ COPY pytest.ini .
 
 RUN chmod +x ./backend/etl/startup.sh
 
+# Set PYTHONPATH to include both /backend and / for imports
+ENV PYTHONPATH=/backend:/
+
 # Switch to the non-privileged user to run the application.
 USER appuser
 
 # Expose the port that the application listens on.
 EXPOSE 8000
+
+# Set the default command to run the startup script
+CMD ["sh", "-c", "exec python -m uvicorn api.index:app --host 0.0.0.0 --port ${PORT:-8000}"]
