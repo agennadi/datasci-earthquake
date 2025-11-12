@@ -9,7 +9,15 @@ from backend.api.routers import (
 )
 from backend.api.config import settings
 import sentry_sdk
+import logging
+import os
 
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 # Initialize Sentry
 sentry_sdk.init(
@@ -22,6 +30,11 @@ sentry_sdk.init(
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/docs", openapi_url="/openapi.json", redirect_slashes=False)
 
+# Log startup information
+logger.info(f"Starting FastAPI application")
+logger.info(f"Environment: {settings.environment}")
+logger.info(f"PORT environment variable: {os.getenv('PORT', 'not set')}")
+
 app.include_router(liquefaction_api.router)
 app.include_router(tsunami_api.router)
 app.include_router(soft_story_api.router)
@@ -32,6 +45,18 @@ origins = [
     "http://localhost:3000",
 ]
 
+# Request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger.info(f"Incoming request: {request.method} {request.url.path}")
+    try:
+        response = await call_next(request)
+        logger.info(f"Response status: {response.status_code} for {request.method} {request.url.path}")
+        return response
+    except Exception as e:
+        logger.error(f"Error handling request {request.method} {request.url.path}: {str(e)}", exc_info=True)
+        raise
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -39,6 +64,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Root endpoint for basic connectivity check
+@app.get("/")
+def root():
+    """Root endpoint to verify server is running"""
+    logger.info("Root endpoint called")
+    return {"message": "API is running", "status": "ok"}
 
 
 # Global exception handler (ensures flush before serverless exit)

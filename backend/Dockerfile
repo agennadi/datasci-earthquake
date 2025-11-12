@@ -72,4 +72,4 @@ USER appuser
 EXPOSE 8000
 
 # Set the default command to run the startup script
-CMD ["sh", "-c", "exec python -m uvicorn api.index:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "echo \"Starting server on port ${PORT:-8000}\" && exec python -m uvicorn api.index:app --host 0.0.0.0 --port ${PORT:-8000}"]
